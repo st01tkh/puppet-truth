@@ -47,4 +47,13 @@ class truth::enforcer {
   } else {
     notice("I am not a Windows Workstation Minimal")
   }
+  if has_role("cygwin_common") {
+    notice("I am a CygWin common")
+    class {"cygwin_common": } ->
+    class {"cygwin_ca_certificates": } ->
+    class {"cygwin_apt_cyg": } ->
+    class {"cygwin_git_encrypt": }
+  } else {
+    notice("I am not a CygWin common")
+  }
 }
